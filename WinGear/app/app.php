@@ -8,5 +8,5 @@ ExceptionHandler::register();
 $app->register(new Silex\Provider\DoctrineServiceProvider());
 // Register services.
 $app['dao.article'] = $app->share(function ($app) {
-    return new MicroCMS\DAO\ArticleDAO($app['db']);
+    return new WinGear\DAO\ArticleDAO($app['db']);
 });
