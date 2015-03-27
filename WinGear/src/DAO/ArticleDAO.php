@@ -1,10 +1,10 @@
 <?php
 
-namespace MicroCMS\DAO;
+namespace WinGear\DAO;
 
 use Doctrine\DBAL\Connection;
+use WinGear\Domain\Article;
 
-use MicroCMS\Domain\Article;
 
 class ArticleDAO
 {
