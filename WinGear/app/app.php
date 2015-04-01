@@ -17,3 +17,9 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 $app['dao.article'] = $app->share(function ($app) {
     return new WinGear\DAO\ArticleDAO($app['db']);
 });
+
+$app['dao.comment'] = $app->share(function ($app) {
+    $commentDAO = new WinGear\DAO\CommentDAO($app['db']);
+    $commentDAO->setArticleDAO($app['dao.article']);
+    return $commentDAO;
+});

@@ -1,4 +1,4 @@
-create database if not exists microcms character set utf8 collate utf8_unicode_ci;
-use microcms;
+create database if not exists WinGear character set utf8 collate utf8_unicode_ci;
+use WinGear;
 
-grant all privileges on microcms.* to 'microcms_user'@'localhost' identified by 'secret';
+grant all privileges on WinGear.* to 'WinGear_user'@'localhost' identified by 'secret';
