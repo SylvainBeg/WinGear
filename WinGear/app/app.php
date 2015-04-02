@@ -12,6 +12,10 @@ $app->register(new Silex\Provider\DoctrineServiceProvider());
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
 ));
+// Register service providers
+$app->register(new Silex\Provider\FormServiceProvider());
+$app->register(new Silex\Provider\TranslationServiceProvider());
+
 $app->register(new Silex\Provider\SessionServiceProvider());
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 $app->register(new Silex\Provider\SecurityServiceProvider(), array(
@@ -27,7 +31,11 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
         ),
     ),
 ));
+ 
 
+            
+            
+            
 // Register services
 $app['dao.article'] = $app->share(function ($app) {
     return new WinGear\DAO\ArticleDAO($app['db']);
@@ -41,3 +49,4 @@ $app['dao.comment'] = $app->share(function ($app) {
     $commentDAO->setUserDAO($app['dao.user']);
     return $commentDAO;
 });
+

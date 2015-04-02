@@ -20,3 +20,7 @@ insert into t_comment values
 
 insert into t_comment values
 (2, "Thank you, I'll try my best.", 1, 2);
+
+/* raw password is '@dm1n' */
+insert into t_user values
+(3, 'admin', 'gqeuP4YJ8hU3ZqGwGikB6+rcZBqefVy+7hTLQkOD+jwVkp4fkS7/gr1rAQfn9VUKWc7bvOD7OsXrQQN5KGHbfg==', 'EDDsl&fBCJB|a5XUtAlnQN8', 'ROLE_ADMIN');
