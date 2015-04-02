@@ -10,43 +10,50 @@ ExceptionHandler::register();
 // Register service providers
 $app->register(new Silex\Provider\DoctrineServiceProvider());
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path' => __DIR__.'/../views',
+'twig.path' => __DIR__.'/../views',
 ));
-// Register service providers
-$app->register(new Silex\Provider\FormServiceProvider());
-$app->register(new Silex\Provider\TranslationServiceProvider());
 
+$app['twig'] = $app->share($app->extend('twig', function(Twig_Environment $twig, $app) {
+    $twig->addExtension(new Twig_Extensions_Extension_Text());
+    return $twig;
+}));
+$app->register(new Silex\Provider\ValidatorServiceProvider());
 $app->register(new Silex\Provider\SessionServiceProvider());
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     'security.firewalls' => array(
         'secured' => array(
-            'pattern' => '^/',
-            'anonymous' => true,
-            'logout' => true,
-            'form' => array('login_path' => '/login', 'check_path' => '/login_check'),
-            'users' => $app->share(function () use ($app) {
-                return new WinGear\DAO\UserDAO($app['db']);
-            }),
-        ),
+        'pattern' => '^/',
+        'anonymous' => true,
+        'logout' => true,
+        'form' => array('login_path' => '/login', 'check_path' => '/login_check'),
+        'users' => $app->share(function () use ($app) {
+            return new WinGear\DAO\UserDAO($app['db']);
+        }),
     ),
+),
+'security.role_hierarchy' => array(
+    'ROLE_ADMIN' => array('ROLE_USER'),
+),
+   'security.access_rules' => array(
+      array('^/admin', 'ROLE_ADMIN'),
+),
 ));
- 
+$app->register(new Silex\Provider\FormServiceProvider());
+$app->register(new Silex\Provider\TranslationServiceProvider());
 
-            
-            
-            
 // Register services
+
 $app['dao.article'] = $app->share(function ($app) {
-    return new WinGear\DAO\ArticleDAO($app['db']);
+return new WinGear\DAO\ArticleDAO($app['db']);
 });
 $app['dao.user'] = $app->share(function ($app) {
-    return new WinGear\DAO\UserDAO($app['db']);
+return new WinGear\DAO\UserDAO($app['db']);
 });
 $app['dao.comment'] = $app->share(function ($app) {
-    $commentDAO = new WinGear\DAO\CommentDAO($app['db']);
-    $commentDAO->setArticleDAO($app['dao.article']);
-    $commentDAO->setUserDAO($app['dao.user']);
-    return $commentDAO;
+$commentDAO = new WinGear\DAO\CommentDAO($app['db']);
+$commentDAO->setArticleDAO($app['dao.article']);
+$commentDAO->setUserDAO($app['dao.user']);
+return $commentDAO;
 });
 

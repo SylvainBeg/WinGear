@@ -80,5 +80,59 @@ class UserDAO extends DAO implements UserProviderInterface
         $user->setRole($row['usr_role']);
         return $user;
     }
+    
+     /**
+     * Returns a list of all users, sorted by role and name.
+     *
+     * @return array A list of all users.
+     */
+    public function findAll() {
+        $sql = "select * from t_user order by usr_role, usr_name";
+        $result = $this->getDb()->fetchAll($sql);
+        // Convert query result to an array of domain objects
+        $entities = array();
+        foreach ($result as $row) {
+            $id = $row['usr_id'];
+            $entities[$id] = $this->buildDomainObject($row);
+        }
+        return $entities;
+    }
+    
+    
+    /**
+     * Saves a user into the database.
+     *
+     * @param \MicroCMS\Domain\User $user The user to save
+     */
+    public function save(User $user) {
+        $userData = array(
+            'usr_name' => $user->getUsername(),
+            'usr_salt' => $user->getSalt(),
+            'usr_password' => $user->getPassword(),
+            'usr_role' => $user->getRole()
+            );
+
+        if ($user->getId()) {
+            // The user has already been saved : update it
+            $this->getDb()->update('t_user', $userData, array('usr_id' => $user->getId()));
+        } else {
+            // The user has never been saved : insert it
+            $this->getDb()->insert('t_user', $userData);
+            // Get the id of the newly created user and set it on the entity.
+            $id = $this->getDb()->lastInsertId();
+            $user->setId($id);
+        }
+    }
+
+    /**
+     * Removes a user from the database.
+     *
+     * @param @param integer $id The user id.
+     */
+    public function delete($id) {
+        // Delete the user
+        $this->getDb()->delete('t_user', array('usr_id' => $id));
+    }
+
 
 }
