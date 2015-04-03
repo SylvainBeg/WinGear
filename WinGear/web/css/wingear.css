@@ -78,3 +78,26 @@ body {
     font-size : 17px;
    
 }
+
+#Text_Admin_Article { 
+    color : #120597;
+    font-family : Andy ;
+    font-style: italic ;
+    font-size: 15px;
+}
+
+#Text_Title_Article{
+    color : #120597;
+    font-family : Andy ;
+    font-size: 40px;
+}
+
+#Text_Title_Article_Layout{
+    color : #120597;
+    font-family : Andy ;
+    font-size: 40px;
+}
+
+#Text_Title_Article_Layout:hover{
+    color : red;
+}
