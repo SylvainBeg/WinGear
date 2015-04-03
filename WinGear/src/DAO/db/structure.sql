@@ -1,6 +1,7 @@
 drop table if exists t_comment;
 drop table if exists t_user;
 drop table if exists t_article;
+drop table if exists t_categorie;
 
 create table t_article (
 art_id integer not null primary key auto_increment,
@@ -24,3 +25,9 @@ usr_id integer not null,
 constraint fk_com_art foreign key(art_id) references t_article(art_id),
 constraint fk_com_usr foreign key(usr_id) references t_user(usr_id)
 ) engine=innodb character set utf8 collate utf8_unicode_ci;
+
+create table t_categorie(
+cate_id integer not null primary key auto_increment,
+cate_name varchar(100) not null
+)engine=innodb character set utf8 collate utf8_unicode_ci;
+

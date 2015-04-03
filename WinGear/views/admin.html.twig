@@ -4,7 +4,7 @@
 {% block title %}Administration{% endblock %}
 
 {% block content %}
-<h2 class="text-center">{{ block('title') }}</h2>
+<h2 class="text-center" id="Text_Title_Admin">{{ block('title') }}</h2>
 {% for flashMessage in app.session.flashbag.get('success') %}
 <div class="alert alert-success">
     {{ flashMessage }}
@@ -13,21 +13,21 @@
 <div class="row">
     <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
         <ul class="nav nav-tabs nav-justified">
-            <li class="active"><a href="#articles" data-toggle="tab">Articles</a></li>
-            <li><a href="#comments" data-toggle="tab">Comments</a></li>
-            <li><a href="#users" data-toggle="tab">Users</a></li>
+            <li class="active"><a href="#articles" data-toggle="tab" id="Text_Admin">Articles</a></li>
+            <li><a href="#comments" data-toggle="tab" id="Text_Admin">Comments</a></li>
+            <li><a href="#users" data-toggle="tab" id="Text_Admin">Users</a></li>
         </ul>
     </div>
 </div>
 <div class="tab-content">
-    <div class="tab-pane fade in active adminTable" id="articles">
+    <div class="tab-pane fade in active adminTable" id="articles" id="Text_Admin">
         {% if articles %}
         <div class="table-responsive">
             <table class="table table-hover table-condensed">
                 <thead>
                     <tr>
-                        <th>Title</th>
-                        <th>Content</th>
+                        <th id="Text_Admin">Title</th>
+                        <th id="Text_Admin">Content</th>
                         <th></th>  <!-- Actions column -->
                     </tr>
                 </thead>
@@ -43,15 +43,15 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <button id="Button_Text_Admin" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                         <h4 class="modal-title" id="myModalLabel">Confirmation needed</h4>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body" id="Text_Admin">
                                         Do you really want to delete this article ?
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                        <a href="/admin/article/{{ article.id }}/delete" class="btn btn-danger">Confirm</a>
+                                        <button id="Button_Text_Admin" type="button" class="btn btn-default" data-dismiss="modal" id="Text_Admin">Cancel</button>
+                                        <a href="/admin/article/{{ article.id }}/delete" class="btn btn-danger" id="Text_Admin">Confirm</a>
                                     </div>
                                 </div><!-- /.modal-content -->
                             </div><!-- /.modal-dialog -->
@@ -64,7 +64,7 @@
         {% else %}
         <div class="alert alert-warning">No articles found.</div>
         {% endif %}
-        <a href="/admin/article/add"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add article</button></a>
+        <a href="/admin/article/add"><button id="Button_Text_Admin" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add article</button></a>
     </div>
     <div class="tab-pane fade adminTable" id="comments">
         {% if comments %}
@@ -72,9 +72,9 @@
             <table class="table table-hover table-condensed">
                 <thead>
                     <tr>
-                        <th>Article</th>
-                        <th>Author</th>
-                        <th>Content</th>
+                        <th id="Text_Admin">Article</th>
+                        <th id="Text_Admin">Author</th>
+                        <th id="Text_Admin">Content</th>
                         <th></th>  <!-- Actions column -->
                     </tr>
                 </thead>
@@ -85,20 +85,20 @@
                     <td>{{ comment.content | truncate(60) }}</td>
                     <td>
                         <a href="/admin/comment/{{ comment.id }}/edit" class="btn btn-info btn-xs" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-                        <button type="button" class="btn btn-danger btn-xs" title="Delete" data-toggle="modal" data-target="#commentDialog{{ comment.id }}"><span class="glyphicon glyphicon-remove"></span>
+                        <button id="Button_Text_Admin" type="button" class="btn btn-danger btn-xs" title="Delete" data-toggle="modal" data-target="#commentDialog{{ comment.id }}"><span class="glyphicon glyphicon-remove"></span>
                         </button>
                         <div class="modal fade" id="commentDialog{{ comment.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                        <h4 class="modal-title" id="myModalLabel">Confirmation needed</h4>
+                                        <button id="Button_Text_Admin" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <h4 class="modal-title" id="myModalLabel" id="Text_Admin">Confirmation needed</h4>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body" id="Text_Admin">
                                         Do you really want to delete this comment ?
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                        <button id="Button_Text_Admin" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                                         <a href="/admin/comment/{{ comment.id }}/delete" class="btn btn-danger">Confirm</a>
                                     </div>
                                 </div><!-- /.modal-content -->
@@ -119,15 +119,15 @@
             <table class="table table-hover table-condensed">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Role</th>
+                        <th id="Text_Admin">Name</th>
+                        <th id="Text_Admin">Role</th>
                         <th></th>  <!-- Actions column -->
                     </tr>
                 </thead>
                 {% for user in users %}
-                <tr>
+                <tr id="Text_Admin">
                     <td>{{ user.username }}</a></td>
-                    <td>
+                    <td id="Text_Admin">
                         {% if user.role == 'ROLE_ADMIN' %}
                             Admin
                         {% else %}
@@ -136,13 +136,13 @@
                     </td>
                     <td>
                         <a href="/admin/user/{{ user.id }}/edit" class="btn btn-info btn-xs" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>
-                        <button type="button" class="btn btn-danger btn-xs" title="Delete" data-toggle="modal" data-target="#userDialog{{ user.id }}"><span class="glyphicon glyphicon-remove"></span>
+                        <button  id="Button_Text_Admin" type="button" class="btn btn-danger btn-xs" title="Delete" data-toggle="modal" data-target="#userDialog{{ user.id }}"><span class="glyphicon glyphicon-remove"></span>
                         </button>
                         <div class="modal fade" id="userDialog{{ user.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        <button id="Button_Text_Admin" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
                                        <h4 class="modal-title" id="myModalLabel">Confirmation needed</h4>
                                     </div>
@@ -150,8 +150,8 @@
                                         Do you really want to delete this user ?
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                        <a href="/admin/user/{{ user.id }}/delete" class="btn btn-danger">Confirm</a>
+                                        <button  id="Button_Text_Admin" type="button" class="btn btn-default" data-dismiss="modal" id="Text_Admin">Cancel</button>
+                                        <a href="/admin/user/{{ user.id }}/delete" class="btn btn-danger" id="Text_Admin">Confirm</a>
                                     </div>
                                 </div><!-- /.modal-content -->
                             </div><!-- /.modal-dialog -->
@@ -164,7 +164,7 @@
         {% else %}
         <div class="alert alert-warning">No users found.</div>
         {% endif %}
-        <a href="/admin/user/add"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add user</button></a>
+        <a href="/admin/user/add"><button id="Button_Text_Admin" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Add user</button></a>
     </div>
 </div>
 {% endblock %}

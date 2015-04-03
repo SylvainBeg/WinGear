@@ -11,6 +11,12 @@ class ArticleDAO extends DAO
      * @return array A list of all articles.
      */
     
+    
+    private $CategorieDAO;
+    
+    public function setCategorieDAO(CategorieDAO $categorieDAO) {
+        $this->CategorieDAO = $categorieDAO;
+    }
    
     public function findAll() {
         $sql = "select * from t_article order by art_id desc";

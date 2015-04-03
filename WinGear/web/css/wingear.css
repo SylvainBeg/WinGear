@@ -18,3 +18,63 @@ body {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+.navbar-inverse{
+    background-color : #120597;
+}
+
+#Titre_barre{
+    color: #fff;
+    font-family : Andy ;
+    font-style: italic ;
+    font-size: 30px;
+}
+
+#Titre_barre:hover{
+    color : grey; 
+}
+#Text_barre {
+    color: #fff;
+    font-family : Andy ;
+    font-style: italic ;
+    font-size: 15px;
+}
+
+#Text_barre:hover{
+    color : grey;
+}
+
+#Menu_Text_barre{
+    font-family : Andy ;
+    font-style: italic ;
+    font-size: 15px;
+}
+#Menu_Text_barre:hover{
+    color : grey;
+}
+
+#Text_Admin { 
+    color : #120597;
+    font-family : Andy ;
+    font-style: italic ;
+    font-size: 15px;
+}
+
+#Text_Admin:hover{
+    color : grey;
+}
+
+#Text_Title_Admin { 
+    color : #120597;
+    font-family : Andy ;
+    font-style: italic ;
+    font-size: 75px;
+}
+
+#Button_Text_Admin{ 
+    
+    font-family : Andy ;
+    font-style: italic ;
+    font-size : 17px;
+   
+}

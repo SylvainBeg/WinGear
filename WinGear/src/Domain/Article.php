@@ -24,6 +24,12 @@ class Article
      * @var string
      */
     private $content;
+    
+    private $categorie;
+    
+    public function setCategorie(Categorie $categorie){
+        $this->categorie =$categorie;
+    }
 
     public function getId() {
         return $this->id;
