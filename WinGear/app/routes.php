@@ -10,41 +10,41 @@ use WinGear\Form\Type\UserType;
 
 // Home page
 $app->get('/', function () use ($app) {
-$articles = $app['dao.article']->findAll();
-return $app['twig']->render('index.html.twig', array('articles' => $articles));
+    $articles = $app['dao.article']->findAll();
+    return $app['twig']->render('index.html.twig', array('articles' => $articles));
 });
 
 // Article details with comments
-    $app->match('/article/{id}', function ($id, Request $request) use ($app) {
+$app->match('/article/{id}', function ($id, Request $request) use ($app) {
     $article = $app['dao.article']->find($id);
     $user = $app['security']->getToken()->getUser();
     $commentFormView = null;
     if ($app['security']->isGranted('IS_AUTHENTICATED_FULLY')) {
-    // A user is fully authenticated : he can add comments
+        // A user is fully authenticated : he can add comments
         $comment = new Comment();
         $comment->setArticle($article);
         $comment->setAuthor($user);
         $commentForm = $app['form.factory']->create(new CommentType(), $comment);
         $commentForm->handleRequest($request);
-    if ($commentForm->isSubmitted() && $commentForm->isValid()) {
-        $app['dao.comment']->save($comment);
-        $app['session']->getFlashBag()->add('success', 'Your comment was succesfully added.');
-       }
-    $commentFormView = $commentForm->createView();
-}
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+            $app['dao.comment']->save($comment);
+            $app['session']->getFlashBag()->add('success', 'Your comment was succesfully added.');
+        }
+        $commentFormView = $commentForm->createView();
+    }
     $comments = $app['dao.comment']->findAllByArticle($id);
     return $app['twig']->render('article.html.twig', array(
-    'article' => $article,
-    'comments' => $comments,
-    'commentForm' => $commentFormView));
+                'article' => $article,
+                'comments' => $comments,
+                'commentForm' => $commentFormView));
 });
-    
+
 // Login form
 $app->get('/login', function(Request $request) use ($app) {
     return $app['twig']->render('login.html.twig', array(
-        'error' => $app['security.last_error']($request),
-        'last_username' => $app['session']->get('_security.last_username'),
-));
+                'error' => $app['security.last_error']($request),
+                'last_username' => $app['session']->get('_security.last_username'),
+    ));
 })->bind('login'); // named route so that path('login') works in Twig templates
 // Admin home page
 
@@ -53,9 +53,9 @@ $app->get('/admin', function() use ($app) {
     $comments = $app['dao.comment']->findAll();
     $users = $app['dao.user']->findAll();
     return $app['twig']->render('admin.html.twig', array(
-        'articles' => $articles,
-        'comments' => $comments,
-        'users' => $users));
+                'articles' => $articles,
+                'comments' => $comments,
+                'users' => $users));
 });
 
 // Add a new article
@@ -66,10 +66,10 @@ $app->match('/admin/article/add', function(Request $request) use ($app) {
     if ($articleForm->isSubmitted() && $articleForm->isValid()) {
         $app['dao.article']->save($article);
         $app['session']->getFlashBag()->add('success', 'The article was successfully created.');
-}
+    }
     return $app['twig']->render('article_form.html.twig', array(
-        'title' => 'New article',
-        'articleForm' => $articleForm->createView()));
+                'title' => 'New article',
+                'articleForm' => $articleForm->createView()));
 });
 
 // Edit an existing article
@@ -80,10 +80,10 @@ $app->match('/admin/article/{id}/edit', function($id, Request $request) use ($ap
     if ($articleForm->isSubmitted() && $articleForm->isValid()) {
         $app['dao.article']->save($article);
         $app['session']->getFlashBag()->add('success', 'The article was succesfully updated.');
-}
+    }
     return $app['twig']->render('article_form.html.twig', array(
-        'title' => 'Edit article',
-        'articleForm' => $articleForm->createView()));
+                'title' => 'Edit article',
+                'articleForm' => $articleForm->createView()));
 });
 
 // Remove an article
@@ -106,8 +106,8 @@ $app->match('/admin/comment/{id}/edit', function($id, Request $request) use ($ap
         $app['session']->getFlashBag()->add('success', 'The comment was succesfully updated.');
     }
     return $app['twig']->render('comment_form.html.twig', array(
-        'title' => 'Edit comment',
-        'commentForm' => $commentForm->createView()));
+                'title' => 'Edit comment',
+                'commentForm' => $commentForm->createView()));
 });
 // Remove a comment
 
@@ -136,8 +136,8 @@ $app->match('/admin/user/add', function(Request $request) use ($app) {
         $app['session']->getFlashBag()->add('success', 'The user was successfully created.');
     }
     return $app['twig']->render('user_form.html.twig', array(
-        'title' => 'New user',
-        'userForm' => $userForm->createView()));
+                'title' => 'New user',
+                'userForm' => $userForm->createView()));
 });
 // Edit an existing user
 $app->match('/admin/user/{id}/edit', function($id, Request $request) use ($app) {
@@ -155,8 +155,8 @@ $app->match('/admin/user/{id}/edit', function($id, Request $request) use ($app) 
         $app['session']->getFlashBag()->add('success', 'The user was succesfully updated.');
     }
     return $app['twig']->render('user_form.html.twig', array(
-        'title' => 'Edit user',
-        'userForm' => $userForm->createView()));
+                'title' => 'Edit user',
+                'userForm' => $userForm->createView()));
 });
 // Remove a user
 $app->get('/admin/user/{id}/delete', function($id, Request $request) use ($app) {

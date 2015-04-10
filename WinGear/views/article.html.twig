@@ -2,38 +2,52 @@
 
 {% block title %}{{ article.title }}{% endblock %}
 
+
 {% block content %}
-<p>
+    <p>
+        {{ article.image }}
     <h2 id="Text_Title_Article">{{ article.title }}</h2>
     <p>{{ article.content }}</p>
+
+    <div class="row">
+        <div class="col-xs-6 col-md-3">
+            <img src="/img/{{ article.image }}" class="img-responsive" alt ="image de l'article"/>
+        </div>
+    </div>
+        
+            <p><strong>{{ article.price }} €</strong></p>
+
+
+
+
     <h3 id="Text_Title_Article">Comments</h3>
     {% for comment in comments %}
         <strong>{{ comment.author.username }}</strong> said : {{ comment.content }}<br>
-    {% else %}
-        No comments yet.
-    {% endfor %}
-    <h3 id="Text_Title_Article" >Add a comment</h3>
-    {% if commentForm %}
-        {{ form_start(commentForm) }}
-            <div id="Text_Admin_Article" class="form-group">
-                {{ form_errors(commentForm.content) }}
-                {{ form_widget(commentForm.content, { 'attr':  {
+        {% else %}
+            No comments yet.
+            {% endfor %}
+                <h3 id="Text_Title_Article" >Add a comment</h3>
+                {% if commentForm %}
+                    {{ form_start(commentForm) }}
+                    <div id="Text_Admin_Article" class="form-group">
+                        {{ form_errors(commentForm.content) }}
+                        {{ form_widget(commentForm.content, { 'attr':  {
                     'rows': '4',
                     'class': 'form-control',
                     'placeholder': 'Enter your comment'
-                }}) }}
-            </div>
-            <div id="Text_Admin_Article"class="form-group">
-                <input id="Button_Text_Admin" type="submit" class="btn btn-primary" value="Publish comment" />
-            </div>
-        {{ form_end(commentForm) }}
-        {% for flashMessage in app.session.flashbag.get('success') %}
-            <div id="Text_Admin_Article" class="alert alert-success">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
-    {% else %}
-        <a href="{{ path('login') }} ">Log in</a> to add comments.
-    {% endif %}
-</p>
-{% endblock %}
+                        }}) }}
+                    </div>
+                    <div id="Text_Admin_Article"class="form-group">
+                        <input id="Button_Text_Admin" type="submit" class="btn btn-primary" value="Publish comment" />
+                    </div>
+                    {{ form_end(commentForm) }}
+                    {% for flashMessage in app.session.flashbag.get('success') %}
+                        <div id="Text_Admin_Article" class="alert alert-success">
+                            {{ flashMessage }}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <a href="{{ path('login') }} ">Log in</a> to add comments.
+                {% endif %}
+            </p>
+            {% endblock %}

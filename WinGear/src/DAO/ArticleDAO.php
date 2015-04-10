@@ -11,6 +11,7 @@ class ArticleDAO extends DAO
      * @return array A list of all articles.
      */
     
+
     
     private $CategorieDAO;
     
@@ -50,6 +51,8 @@ class ArticleDAO extends DAO
         $article->setId($row['art_id']);
         $article->setTitle($row['art_title']);
         $article->setContent($row['art_content']);
+        $article->setImage($row['art_image']);
+        $article->setPrice($row['art_price']);
         return $article;
     }
     
@@ -62,6 +65,8 @@ class ArticleDAO extends DAO
         $articleData = array(
             'art_title' => $article->getTitle(),
             'art_content' => $article->getContent(),
+            'art_image' => $article->getImage(),
+            'art_price' => $article->getPrice()
             );
 
         if ($article->getId()) {

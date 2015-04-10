@@ -27,6 +27,29 @@ class Article
     
     private $categorie;
     
+    private $image;
+    private $price;
+    
+    
+    
+    public function getImage() {
+        return $this->image;
+    }
+
+    public function getPrice() {
+        return $this->price;
+    }
+
+    public function setImage($image) {
+        $this->image = $image;
+    }
+
+    public function setPrice($price) {
+        $this->price = $price;
+    }
+
+    
+        
     public function setCategorie(Categorie $categorie){
         $this->categorie =$categorie;
     }

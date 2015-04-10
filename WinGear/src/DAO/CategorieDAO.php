@@ -13,14 +13,14 @@ class CategorieDAO extends DAO  {
         else
             throw new Exception ("No user matching id" . $id);
     }
-    
-    protected function buildDomainObjet($row){
+
+    protected function buildDomainObject($row) {
         $categorie = new Categorie();
         $categorie->setID($row['cate_id']);
         $categorie->setName($row['cate_name']);
         return $categorie;
     }
-    
+
 }
 
   

@@ -6,7 +6,9 @@ drop table if exists t_categorie;
 create table t_article (
 art_id integer not null primary key auto_increment,
 art_title varchar(100) not null,
-art_content varchar(2000) not null
+art_content varchar(2000) not null,
+art_image varchar(100) not null,
+art_price float not null
 ) engine=innodb character set utf8 collate utf8_unicode_ci;
 
 create table t_user (
