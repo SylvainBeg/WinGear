@@ -1,0 +1,48 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}{{ categorie.name }}{% endblock %}
+
+{% block content %}
+    </br>
+<h2 class="text-center">{{ block('title') }}</h2>
+{#<div class="well">
+    <form class="form-horizontal" role="form">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Famille</label>
+            <div class="col-sm-9">
+                <p class="form-control-static">{{ drug.family.name }}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Nom légal</label>
+            <div class="col-sm-9">
+            <p class="form-control-static">{{ drug.copyrighting }}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Composition</label>
+            <div class="col-sm-9">
+                <p class="form-control-static">{{ drug.content }}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Effets secondaires</label>
+            <div class="col-sm-9">
+                <p class="form-control-static">{{ drug.effects }}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Contre-indications</label>
+            <div class="col-sm-9">
+                <p class="form-control-static">{{ drug.contraindication }}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">Prix d'un échantillon</label>
+            <div class="col-sm-9">
+                <p class="form-control-static">{{ drug.samplePrice }}</p>
+            </div>
+        </div>
+    </form>
+</div>#}
+{% endblock %}

@@ -46,6 +46,7 @@ $app->get('/login', function(Request $request) use ($app) {
                 'last_username' => $app['session']->get('_security.last_username'),
     ));
 })->bind('login'); // named route so that path('login') works in Twig templates
+
 // Admin home page
 
 $app->get('/admin', function() use ($app) {
@@ -166,4 +167,17 @@ $app->get('/admin/user/{id}/delete', function($id, Request $request) use ($app) 
     $app['dao.user']->delete($id);
     $app['session']->getFlashBag()->add('success', 'The user was succesfully removed.');
     return $app->redirect('/admin');
+});
+
+
+// List of all categorie
+$app->get('/categories/', function() use ($app) {
+    $categories = $app['dao.categorie']->findAll();
+    return $app['twig']->render('categories.html.twig', array('categories' => $categories));
+});
+
+// Details for a categorie
+$app->get('/categorie/{id}', function($id) use ($app) {
+    $categorie = $app['dao.categorie']->find($id);
+    return $app['twig']->render('categorie.html.twig', array('categorie' => $categorie));
 });

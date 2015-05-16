@@ -56,4 +56,8 @@ $commentDAO->setArticleDAO($app['dao.article']);
 $commentDAO->setUserDAO($app['dao.user']);
 return $commentDAO;
 });
+$app['dao.categorie'] = $app->share(function ($app) {
+    $categorieDAO = new WinGear\DAO\CategorieDAO($app['db']);
+    return $categorieDAO;
+});
 

@@ -1,0 +1,28 @@
+{% extends "layout.html.twig" %}
+
+
+{% block title %}Catégories{% endblock %}
+
+{% block content %}
+    <h2 class="text-center">{{ block('title') }}</h2>
+    </br>
+    </br>
+    {% if categories %}
+        <div class="table-responsive">
+            <table class="table table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <th>Sport</th>
+                    </tr>
+                </thead>
+                {% for categorie in categories %}
+                    <tr>
+                        <td><a href="/categorie/{{ categorie.id }}">{{ categorie.name }}</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-warning">Aucune catégorie trouvée.</div>
+    {% endif %}     
+{% endblock %}
