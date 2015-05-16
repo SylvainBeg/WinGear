@@ -19,6 +19,7 @@ class ArticleDAO extends DAO
         $this->CategorieDAO = $categorieDAO;
     }
    
+    // Tous les articles
     public function findAll() {
         $sql = "select * from t_article order by art_id desc";
         $result = $this->getDb()->fetchAll($sql);
@@ -30,6 +31,21 @@ class ArticleDAO extends DAO
         }
         return $articles;
     }
+    
+     // Tous les articles d'une catégorie
+    public function findAllCategorie($categorie) {
+        $sql = "select * from t_article where categorie = ? order by art_id desc";
+        $result = $this->getDb()->fetchAll($sql, array($categorie));
+        // Convert query result to an array of domain objects
+        $articles = array();
+        foreach ($result as $row) {
+            $articleId = $row['art_id'];
+            $articles[$articleId] = $this->buildDomainObject($row);
+        }
+        return $articles;
+    }
+    
+    
     /**
      * Creates an Article object based on a DB row.
      *

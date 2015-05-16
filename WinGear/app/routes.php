@@ -46,7 +46,6 @@ $app->get('/login', function(Request $request) use ($app) {
                 'last_username' => $app['session']->get('_security.last_username'),
     ));
 })->bind('login'); // named route so that path('login') works in Twig templates
-
 // Admin home page
 
 $app->get('/admin', function() use ($app) {
@@ -179,5 +178,9 @@ $app->get('/categories/', function() use ($app) {
 // Details for a categorie
 $app->get('/categorie/{id}', function($id) use ($app) {
     $categorie = $app['dao.categorie']->find($id);
-    return $app['twig']->render('categorie.html.twig', array('categorie' => $categorie));
+    $articles = $app['dao.article']->findAllCategorie($id);
+    return $app['twig']->render('categorie.html.twig', array(
+            'categorie' => $categorie,
+            'articles' => $articles
+            ));
 });
