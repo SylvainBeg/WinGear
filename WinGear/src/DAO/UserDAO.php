@@ -7,9 +7,8 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use WinGear\Domain\User;
-class UserDAO extends DAO implements UserProviderInterface
 
-{
+class UserDAO extends DAO implements UserProviderInterface {
 
     /**
      * Returns a user matching the supplied id.
@@ -18,7 +17,6 @@ class UserDAO extends DAO implements UserProviderInterface
      *
      * @return \MicroCMS\Domain\User|throws an exception if no matching user is found
      */
-
     public function find($id) {
 
         $sql = "select * from t_user where usr_id=?";
@@ -32,9 +30,7 @@ class UserDAO extends DAO implements UserProviderInterface
     /**
      * {@inheritDoc}
      */
-
-    public function loadUserByUsername($username)
-    {
+    public function loadUserByUsername($username) {
         $sql = "select * from t_user where usr_name=?";
         $row = $this->getDb()->fetchAssoc($sql, array($username));
         if ($row)
@@ -46,9 +42,7 @@ class UserDAO extends DAO implements UserProviderInterface
     /**
      * {@inheritDoc}
      */
-    public function refreshUser(UserInterface $user)
-
-    {
+    public function refreshUser(UserInterface $user) {
         $class = get_class($user);
         if (!$this->supportsClass($class)) {
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $class));
@@ -59,18 +53,16 @@ class UserDAO extends DAO implements UserProviderInterface
     /**
      * {@inheritDoc}
      */
-
-    public function supportsClass($class)
-    {
+    public function supportsClass($class) {
         return 'WinGear\Domain\User' === $class;
     }
+
     /**
      * Creates a User object based on a DB row.
      *
      * @param array $row The DB row containing User data.
      * @return \MicroCMS\Domain\User
      */
-
     protected function buildDomainObject($row) {
         $user = new User();
         $user->setId($row['usr_id']);
@@ -78,10 +70,13 @@ class UserDAO extends DAO implements UserProviderInterface
         $user->setPassword($row['usr_password']);
         $user->setSalt($row['usr_salt']);
         $user->setRole($row['usr_role']);
+        $user->setNom($row['usr_nom']);
+        $user->setPrenom($row['usr_prenom']);
+        $user->setEmail($row['usr_email']);
         return $user;
     }
-    
-     /**
+
+    /**
      * Returns a list of all users, sorted by role and name.
      *
      * @return array A list of all users.
@@ -97,20 +92,29 @@ class UserDAO extends DAO implements UserProviderInterface
         }
         return $entities;
     }
-    
-    
+
     /**
      * Saves a user into the database.
      *
      * @param \MicroCMS\Domain\User $user The user to save
      */
     public function save(User $user) {
+        $role = $user->getRole();
+        if (!isset($role)) {
+            $usr_role = "ROLE_USER";
+        } else {
+            $usr_role = $user->getRole();
+        }
+
         $userData = array(
             'usr_name' => $user->getUsername(),
             'usr_salt' => $user->getSalt(),
             'usr_password' => $user->getPassword(),
-            'usr_role' => $user->getRole()
-            );
+            'usr_role' => $usr_role,
+            'usr_prenom' => $user->getPrenom(),
+            'usr_nom' => $user->getNom(),
+            'usr_email' => $user->getEmail()
+        );
 
         if ($user->getId()) {
             // The user has already been saved : update it
@@ -133,6 +137,5 @@ class UserDAO extends DAO implements UserProviderInterface
         // Delete the user
         $this->getDb()->delete('t_user', array('usr_id' => $id));
     }
-
 
 }

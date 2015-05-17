@@ -7,6 +7,7 @@ use WinGear\Domain\User;
 use WinGear\Form\Type\CommentType;
 use WinGear\Form\Type\ArticleType;
 use WinGear\Form\Type\UserType;
+use WinGear\Form\Type\InscriptionType;
 
 // Home page
 $app->get('/', function () use ($app) {
@@ -116,7 +117,7 @@ $app->get('/admin/comment/{id}/delete', function($id, Request $request) use ($ap
     $app['session']->getFlashBag()->add('success', 'The comment was succesfully removed.');
     return $app->redirect('/admin');
 });
-// Add a user
+// Add a user by admin
 
 $app->match('/admin/user/add', function(Request $request) use ($app) {
     $user = new User();
@@ -139,6 +140,32 @@ $app->match('/admin/user/add', function(Request $request) use ($app) {
                 'title' => 'New user',
                 'userForm' => $userForm->createView()));
 });
+
+// Add a user by admin
+
+$app->match('/user/add', function(Request $request) use ($app) {
+    $user = new User();
+    $userForm = $app['form.factory']->create(new InscriptionType(), $user);
+    $userForm->handleRequest($request);
+    if ($userForm->isSubmitted() && $userForm->isValid()) {
+        // generate a random salt value
+        $salt = substr(md5(time()), 0, 23);
+        $user->setSalt($salt);
+        $plainPassword = $user->getPassword();
+        // find the default encoder
+        $encoder = $app['security.encoder.digest'];
+        // compute the encoded password
+        $password = $encoder->encodePassword($plainPassword, $user->getSalt());
+        $user->setPassword($password);
+        $app['dao.user']->save($user);
+        $app['session']->getFlashBag()->add('success', 'The user was successfully created.');
+    }
+    return $app['twig']->render('user_new.html.twig', array(
+                'title' => 'Inscription',
+                'userForm' => $userForm->createView()));
+});
+
+
 // Edit an existing user
 $app->match('/admin/user/{id}/edit', function($id, Request $request) use ($app) {
     $user = $app['dao.user']->find($id);
@@ -180,7 +207,7 @@ $app->get('/categorie/{id}', function($id) use ($app) {
     $categorie = $app['dao.categorie']->find($id);
     $articles = $app['dao.article']->findAllCategorie($id);
     return $app['twig']->render('categorie.html.twig', array(
-            'categorie' => $categorie,
-            'articles' => $articles
-            ));
+                'categorie' => $categorie,
+                'articles' => $articles
+    ));
 });

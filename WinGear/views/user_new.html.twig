@@ -1,0 +1,96 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <h2 class="text-center" id="Text_Title_Admin">{{ block('title') }}</h2>
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    {% if form_errors(userForm.password.first) %}
+        <div class="alert alert-danger">
+            {{ form_errors(userForm.password.first) }}
+        </div>
+    {% endif %}
+
+    <div class="well" id="Text_Admin_Article">
+        {{ form_start(userForm, { 'attr': {'class': 'form-horizontal'} }) }}
+        <div id="Text_Admin_Article" class="form-group">
+            {{ form_label(userForm.username, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+            }}) }}
+            <div class="col-sm-4">
+                {{ form_errors(userForm.username) }}
+                {{ form_widget(userForm.username, { 'attr':  {
+                'class': 'form-control'
+                }}) }}
+            </div>
+        </div>
+        <div id="Text_Admin_Article" class="form-group">
+            {{ form_label(userForm.password.first, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+            }}) }}
+            <div id="Text_Admin_Article" class="col-sm-4">
+                {{ form_widget(userForm.password.first, { 'attr':  {
+                'class': 'form-control'
+                }}) }}
+            </div>
+        </div>
+        <div  id="Text_Admin_Article" class="form-group">
+            {{ form_label(userForm.password.second, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+            }}) }}
+            <div id="Text_Admin_Article" class="col-sm-4">
+                {{ form_widget(userForm.password.second, { 'attr':  {
+                'class': 'form-control'
+                }}) }}
+            </div>
+        </div>
+
+
+        <div id="Text_Admin_Article" class="form-group">
+            {{ form_label(userForm.prenom, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+            }}) }}
+            <div class="col-sm-4">
+                {{ form_errors(userForm.prenom) }}
+                {{ form_widget(userForm.prenom, { 'attr':  {
+                'class': 'form-control'
+                }}) }}
+            </div>
+        </div>
+
+        <div id="Text_Admin_Article" class="form-group">
+            {{ form_label(userForm.nom, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+            }}) }}
+            <div class="col-sm-4">
+                {{ form_errors(userForm.nom) }}
+                {{ form_widget(userForm.nom, { 'attr':  {
+                'class': 'form-control'
+                }}) }}
+            </div>
+        </div>
+
+        <div id="Text_Admin_Article" class="form-group">
+            {{ form_label(userForm.email, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+            }}) }}
+            <div class="col-sm-4">
+                {{ form_errors(userForm.email) }}
+                {{ form_widget(userForm.email, { 'attr':  {
+                'class': 'form-control'
+                }}) }}
+            </div>
+        </div>
+
+        <div id="Text_Admin_Article" class="form-group">
+            <div id="Text_Admin_Article" class="col-sm-offset-5 col-sm-3">
+                <input type="submit" class="btn btn-primary" value="Save" />
+            </div>
+        </div>
+        {{ form_end(userForm) }}
+    </div>
+{% endblock %}
