@@ -6,7 +6,7 @@
 {% for article in articles %}
 <article>
     <h2><a id="Text_Title_Article_Layout" class="articleTitle" href="/article/{{ article.id }}">{{ article.title }}</a></h2>
-    <img src="../img/{{ article.image }}" alt="...">
+    <img src="/img/{{article.image}}" alt="image de l'article">
 </article>
 {% endfor %}
 {% endblock %}
