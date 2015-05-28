@@ -24,6 +24,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
                                 <a href="/categories/"  id="Text_barre"> Catégories </a>
+                                <li><a href="/panier/" id="Text_barre">Votre Panier</a></li>
                             </li>
                             {% if app.security.token and is_granted('ROLE_ADMIN') %}
                                 <li class="{% if adminMenu is defined %}active{% endif %}"><a href="/admin" id="Text_barre"><span class="glyphicon glyphicon-cog"></span> Administration</a></li>
@@ -44,6 +45,7 @@
                                         <span class="glyphicon glyphicon-user"></span> Anonyme <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
                                         <li><a href="{{ path('login') }}" id="Menu_Text_barre">Se connecter</a></li>
+                                        
                                     </ul>
                                 </li>
                             {% endif %}
