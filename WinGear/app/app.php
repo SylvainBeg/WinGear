@@ -61,3 +61,8 @@ $app['dao.categorie'] = $app->share(function ($app) {
     return $categorieDAO;
 });
 
+$app['dao.panier'] = $app->share(function ($app){
+    return new WinGear\DAO\PanierDAO($app['db']);
+    
+});
+
