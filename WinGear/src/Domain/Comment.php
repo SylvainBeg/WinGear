@@ -28,6 +28,7 @@ class Comment
      * @var \WinGear\Domain\Article
      */
     private $article;
+    
     public function getId() {
         return $this->id;
     }

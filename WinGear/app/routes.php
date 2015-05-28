@@ -47,8 +47,8 @@ $app->get('/login', function(Request $request) use ($app) {
                 'last_username' => $app['session']->get('_security.last_username'),
     ));
 })->bind('login'); // named route so that path('login') works in Twig templates
-// Admin home page
 
+// Admin home page
 $app->get('/admin', function() use ($app) {
     $articles = $app['dao.article']->findAll();
     $comments = $app['dao.comment']->findAll();
@@ -110,15 +110,15 @@ $app->match('/admin/comment/{id}/edit', function($id, Request $request) use ($ap
                 'title' => 'Edit comment',
                 'commentForm' => $commentForm->createView()));
 });
-// Remove a comment
 
+// Remove a comment
 $app->get('/admin/comment/{id}/delete', function($id, Request $request) use ($app) {
     $app['dao.comment']->delete($id);
     $app['session']->getFlashBag()->add('success', 'The comment was succesfully removed.');
     return $app->redirect('/admin');
 });
-// Add a user by admin
 
+// Add a user by admin
 $app->match('/admin/user/add', function(Request $request) use ($app) {
     $user = new User();
     $userForm = $app['form.factory']->create(new UserType(), $user);
@@ -141,8 +141,7 @@ $app->match('/admin/user/add', function(Request $request) use ($app) {
                 'userForm' => $userForm->createView()));
 });
 
-// Add a user by admin
-
+// Inscription
 $app->match('/user/add', function(Request $request) use ($app) {
     $user = new User();
     $userForm = $app['form.factory']->create(new InscriptionType(), $user);
@@ -210,4 +209,25 @@ $app->get('/categorie/{id}', function($id) use ($app) {
                 'categorie' => $categorie,
                 'articles' => $articles
     ));
+});
+
+// Display and edit profil
+$app->match('/monprofil/', function(Request $request) use ($app) {
+    $user = $app['security']->getToken()->getUser();
+    $id = $user->getId();
+    $userForm = $app['form.factory']->create(new InscriptionType(), $user);
+    $userForm->handleRequest($request);
+    if ($userForm->isSubmitted() && $userForm->isValid()) {
+        $plainPassword = $user->getPassword();
+        // find the encoder for the user
+        $encoder = $app['security.encoder_factory']->getEncoder($user);
+        // compute the encoded password
+        $password = $encoder->encodePassword($plainPassword, $user->getSalt());
+        $user->setPassword($password);
+        $app['dao.user']->save($user);
+        $app['session']->getFlashBag()->add('success', 'The user was succesfully updated.');
+    }
+    return $app['twig']->render('user_new.html.twig', array(
+                'title' => 'Edit user',
+                'userForm' => $userForm->createView()));
 });

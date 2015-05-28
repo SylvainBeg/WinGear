@@ -20,7 +20,10 @@ class UserType extends AbstractType
             ))
             ->add('role', 'choice', array(
                 'choices' => array('ROLE_ADMIN' => 'Admin', 'ROLE_USER' => 'User')
-            ));
+            ))
+            ->add('nom', 'text')
+            ->add('prenom', 'text')
+            ->add('email', 'text');
     }
 
     public function getName()
