@@ -28,6 +28,7 @@ class Article
     private $categorie;
     
     private $image;
+    
     private $price;
     
     
@@ -77,6 +78,7 @@ class Article
     public function setContent($content) {
         $this->content = $content;
     }
+    
     
     
 }

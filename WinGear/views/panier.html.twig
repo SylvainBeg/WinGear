@@ -4,12 +4,47 @@
 {% block title %}Votre Panier {% endblock %}
 
 {% block content %}
-{% for panier in paniers %}
-{#<article>
-    <h2><a id="Text_Title_Article_Layout" class="articleTitle" href="/article/{{ article.id }}">{{ article.title }}</a></h2>
-    <img src="../img/{{ article.image }}" alt="...">
-</article>#}
-{{ panier.id_user }} aa {{ panier.id_product }}
-{% endfor %}
+
+<table class="table table-hover table-condensed">
+    
+    
+    <div class="row">
+    <div class="col-xs-6 col-md-3">
+    <h1> Votre Panier </h1> 
+        
+                <thead>
+                    
+                <tr>
+                    
+                    <th>Nom de l'article</th>
+                    <th>Prix</th>
+                    <th>Quantité</th>
+                    
+                </tr>
+                </thead>
+                
+                
+                {% for panier in paniers %}
+                    
+                    {% for article in articles %}
+                    {% if article.id == panier.id_product %}
+                    <tr>
+                    
+                        <td>{{ article.title }}   </td>
+                        <td>{{ article.price }}  €</td>
+                        <td>{{ panier.Quantite }}</td>
+                    
+                    </tr>
+                    
+                    {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </table>
+            
+</div>
+           
+</div>
+
+
 {% endblock %}
 

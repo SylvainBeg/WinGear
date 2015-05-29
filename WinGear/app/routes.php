@@ -8,9 +8,16 @@ use WinGear\Form\Type\CommentType;
 use WinGear\Form\Type\ArticleType;
 use WinGear\Form\Type\UserType;
 use WinGear\Form\Type\InscriptionType;
+use WinGear\Domain\Panier;
 
 // Home page
+
 $app->get('/', function () use ($app) {
+    return $app['twig']->render('accueil.html.twig', array());
+});
+
+
+$app->get('/index/', function () use ($app) {
     $articles = $app['dao.article']->findAll();
     return $app['twig']->render('index.html.twig', array('articles' => $articles));
 });
@@ -238,7 +245,29 @@ $app->match('/panier/', function (Request $request) use ($app) {
     $user = $app['security']->getToken()->getUser();
     $id = $user->getId();
     $paniers = $app['dao.panier']->findAllProduct($id);
-    return $app['twig']->render('panier.html.twig',array('paniers' => $paniers));
+    
+    $articles = $app['dao.article']->findAll();
+    return $app['twig']->render('panier.html.twig',array(
+        'paniers' => $paniers,
+        'articles' => $articles
+        
+        ));
+});
+
+// Ajout dans le panier
+$app->match('/addPan/{id}/', function($id, Request $request) use ($app) {  
+    $panier = new Panier();
+    if ($app['security']->isGranted('IS_AUTHENTICATED_FULLY')) {
+        
+        $user = $app['security']->getToken()->getUser();
+        $panier->setId_user($user);
+        $panier->setId_product($id);
+        $panier->setQuantite("1");
+        $app['dao.panier']->save($panier);
+    $app['session']->getFlashBag()->add('success', "L'article a été ajouté au panier");
+    
+    }
+    return $app['twig']->render('panier.html.twig',array('paniers' => $paniers));    
 });
 
 

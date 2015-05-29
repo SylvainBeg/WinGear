@@ -7,15 +7,21 @@
 <article>
     
                             
-            <div class="thumbnail">
+            <div class="row">
+                                <div class="col-sm-6 col-md-4">
+                                    <div class="thumbnail">
+                                        <img src="../img/{{ article.image }}" alt="...">
+                                        <div class="caption">
+                                            <h3>{{ article.title }}</h3>
+                                            <p>{{ article.price }} €</p>
+                                            <p><a href="/article/{{ article.id }}" class="btn btn-primary" role="button">Voir</a></p>
+                                        </div>
+                                    </div>
                                         
-                <div class="caption">
-                    <h3><a id="Text_Title_Article_Layout" class="articleTitle" href="/article/{{ article.id }}">{{ article.title }}</a></h3>
-                    <img src="/img/{{ article.image }}" class="img-responsive" alt ="image de l'article"/>                                                                                               
-                </div>          
-            </div>
-    
-    
+                                </div>          
+                            </div>                                                                                                           
+                                        
+                       
 </article>
 {% endfor %}
 {% endblock %}

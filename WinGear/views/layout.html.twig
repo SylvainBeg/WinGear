@@ -13,24 +13,33 @@
             <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
                 <div class="container">
                     <div class="navbar-header">
+                        <div class="col-md-4">
+                                <img class="img-responsive" id="imgHome" src="/img/logo.png" alt="Image d'accueil"/>
+                        </div>
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-target">
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" id="Titre_barre" href="/">WinGear</a>
+                        
+                        <a class="navbar-brand" id="Titre_barre" href="/">WinGear</a>               
+                                                
                     </div>
                     <div class="collapse navbar-collapse" id="navbar-collapse-target">
                         <ul class="nav navbar-nav navbar-right">
+                            
+                            <li class="dropdown">
+                            <a href="/index/" class="navbar-brand" id="Text_barre" href="/">Nos articles</a>
+                            </li>
                             <li class="dropdown">
                                 <a href="/categories/"  id="Text_barre"> Catégories </a>
                             </li>
-
+                            
                             {% if app.security.token and is_granted('ROLE_ADMIN') %}
                                 <li class="{% if adminMenu is defined %}active{% endif %}"><a href="/admin" id="Text_barre"><span class="glyphicon glyphicon-cog"></span> Administration</a></li>
                                 {% endif %}
                                 {% if app.security.token and is_granted('IS_AUTHENTICATED_FULLY') %}
-
+                                
                                 <li class="dropdown">
                                     <a href="/panier/"  id="Text_barre"> Votre Panier </a>
                                 </li>
@@ -57,6 +66,11 @@
                     </div>
                 </div><!-- /.container -->
             </nav>
+                        
+                        
+            <h1>
+                            
+          </h1>           
             <div  id="content">{% block content %}{% endblock %}</div>
 
         </div>

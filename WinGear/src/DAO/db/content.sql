@@ -20,3 +20,5 @@ INSERT INTO `t_comment` (`com_id`, `com_content`, `art_id`, `usr_id`) VALUES
 (1, 'J''adoooore ! :)', 6, 3),
 (2, 'mm', 5, 3);
 
+INSERT INTO t_panier ( pan_usr, pan_art, pan_quant) Values
+(5,2,1);
