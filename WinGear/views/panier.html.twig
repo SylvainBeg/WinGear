@@ -1,0 +1,14 @@
+
+{% extends "layout.html.twig" %}
+
+{% block title %}Votre Panier {% endblock %}
+
+{% block content %}
+{% for article in articles %}
+<article>
+    <h2><a id="Text_Title_Article_Layout" class="articleTitle" href="/article/{{ article.id }}">{{ article.title }}</a></h2>
+    <img src="../img/{{ article.image }}" alt="...">
+</article>
+{% endfor %}
+{% endblock %}
+

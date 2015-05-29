@@ -231,3 +231,14 @@ $app->match('/monprofil/', function(Request $request) use ($app) {
                 'title' => 'Edit user',
                 'userForm' => $userForm->createView()));
 });
+
+// Panier
+
+/*$app->match('/panier/{id}', function ($id, Request $request) use ($app) {
+    $panier = $app['dao.panier']->
+
+    /*return $app['twig']->render('panier.html.twig',array(
+        
+    ))
+});*/
+
