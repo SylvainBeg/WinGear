@@ -201,20 +201,11 @@ $app->get('/categories/', function() use ($app) {
     return $app['twig']->render('categories.html.twig', array('categories' => $categories));
 });
 
-// Details for a categorie
-$app->get('/categorie/{id}', function($id) use ($app) {
-    $categorie = $app['dao.categorie']->find($id);
-    $articles = $app['dao.article']->findAllCategorie($id);
-    return $app['twig']->render('categorie.html.twig', array(
-                'categorie' => $categorie,
-                'articles' => $articles
-    ));
-});
+
 
 // Display and edit profil
 $app->match('/monprofil/', function(Request $request) use ($app) {
     $user = $app['security']->getToken()->getUser();
-    $id = $user->getId();
     $userForm = $app['form.factory']->create(new InscriptionType(), $user);
     $userForm->handleRequest($request);
     if ($userForm->isSubmitted() && $userForm->isValid()) {
@@ -232,13 +223,22 @@ $app->match('/monprofil/', function(Request $request) use ($app) {
                 'userForm' => $userForm->createView()));
 });
 
+// Details for a categorie
+$app->get('/categorie/{id}', function($id) use ($app) {
+    $categorie = $app['dao.categorie']->find($id);
+    $articles = $app['dao.article']->findAllCategorie($id);
+    return $app['twig']->render('categorie.html.twig', array(
+                'categorie' => $categorie,
+                'articles' => $articles
+    ));
+});
+
 // Panier
+$app->match('/panier/', function (Request $request) use ($app) {
+    $user = $app['security']->getToken()->getUser();
+    $id = $user->getId();
+    $paniers = $app['dao.panier']->findAllProduct($id);
+    return $app['twig']->render('panier.html.twig',array('paniers' => $paniers));
+});
 
-/*$app->match('/panier/{id}', function ($id, Request $request) use ($app) {
-    $panier = $app['dao.panier']->
-
-    /*return $app['twig']->render('panier.html.twig',array(
-        
-    ))
-});*/
 

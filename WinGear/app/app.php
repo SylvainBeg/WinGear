@@ -26,7 +26,7 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
         'pattern' => '^/',
         'anonymous' => true,
         'logout' => true,
-        'form' => array('login_path' => '/login', 'check_path' => '/login_check'),
+        'form' => array('login_path' => '/login', 'check_path' => '/login_check' ),
         'users' => $app->share(function () use ($app) {
             return new WinGear\DAO\UserDAO($app['db']);
         }),

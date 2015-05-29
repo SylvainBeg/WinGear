@@ -4,11 +4,12 @@
 {% block title %}Votre Panier {% endblock %}
 
 {% block content %}
-{% for article in articles %}
-<article>
+{% for panier in paniers %}
+{#<article>
     <h2><a id="Text_Title_Article_Layout" class="articleTitle" href="/article/{{ article.id }}">{{ article.title }}</a></h2>
     <img src="../img/{{ article.image }}" alt="...">
-</article>
+</article>#}
+{{ panier.id_user }} aa {{ panier.id_product }}
 {% endfor %}
 {% endblock %}
 

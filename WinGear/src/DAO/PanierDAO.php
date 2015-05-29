@@ -17,25 +17,25 @@ use WinGear\Domain\Panier;
      private $Id_ProductDAO;
      
      public function setId_UserDAO( UserDAO $userDAO){
-         $this->Id_UserDAO = $userDAO;
-         
+         $this->Id_UserDAO = $userDAO;         
      }
      
      public function setId_ProductDAO (ArticleDAO $productDAO){
          $this->Id_ProductDAO = $productDAO;
      }
      
-     // tous les articles d'un user 
+     // Tous les lignePanier d'un user 
      public function findAllProduct($id_User){
-         $sql = "select * from t_panier where pan_user = ? order by pan_art desc";
+         $sql = "select * from t_panier where pan_usr = ? order by pan_art desc";
          $result = $this->getDb()->fetchAll($sql, array($id_User) );
          
-         $articles = array();
+         $lignePanier = array();
+         $i = 0;
          foreach ($result as $row){
-             $articleId = $row['pan_art'];
-             $articles[$articleId] = $this->buildDomainObject($row);
+             $i = $i +1;
+             $lignePanier[$i] = $this->buildDomainObject($row);
          }
-         return $articles;
+         return $lignePanier;
      }
 
     protected function buildDomainObject($row) {
@@ -55,8 +55,7 @@ use WinGear\Domain\Panier;
         if($panier->getId_product() && $panier->getId_user()){
             $this->getDb()->update('t_panier', $panierData, array('pan_art' => $panier->getId_product() , 'pan_usr' => $panier->getId_user()));
           
-        }
-         else{
+        } else{
             $this->getDb()->insert('t_panier', $panierData);     
            
         }
