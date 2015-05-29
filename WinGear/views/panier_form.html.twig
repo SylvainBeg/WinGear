@@ -1,0 +1,40 @@
+
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <h2 class="text-center" id="Text_Title_Admin">{{ block('title') }}</h2>
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    {% if form_errors(panierForm.quantite) %}
+        <div class="alert alert-danger">
+            {{ form_errors(userForm.quantite) }}
+        </div>
+    {% endif %}
+    <div class="well" id="Text_Admin_Article">
+        {{ form_start(panierForm, { 'attr': {'class': 'form-horizontal'} }) }}
+        <div id="Text_Admin_Article" class="form-group">
+            {{ form_label(panierForm.quantite, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+            }}) }}
+            <div class="col-sm-4">
+                {{ form_errors(panierForm.quantite) }}
+                {{ form_widget(panierForm.quantite, { 'attr':  {
+                'class': 'form-control'
+                }}) }}
+            </div>
+        </div>
+        <div id="Text_Admin_Article" class="form-group">
+        <div id="Text_Admin_Article" class="col-sm-offset-5 col-sm-3">
+                <input type="submit" class="btn btn-primary" value="save" />
+            </div>
+        </div>
+        {{ form_end(panierForm) }}
+    </div>
+
+{% endblock %}            
+         

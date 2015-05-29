@@ -4,11 +4,11 @@
 
 {% block content %}
 {% for article in articles %}
-<article>
+<article >
     
-                            
-            <div class="row">
-                                <div class="col-sm-6 col-md-4">
+    <div display:inline>                    
+            <div class="row" >
+                                <div class="col-sm-6 col-md-4" >
                                     <div class="thumbnail">
                                         <img src="../img/{{ article.image }}" alt="...">
                                         <div class="caption">
@@ -19,7 +19,8 @@
                                     </div>
                                         
                                 </div>          
-                            </div>                                                                                                           
+                            </div> 
+    </div>
                                         
                        
 </article>

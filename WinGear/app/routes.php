@@ -9,6 +9,7 @@ use WinGear\Form\Type\ArticleType;
 use WinGear\Form\Type\UserType;
 use WinGear\Form\Type\InscriptionType;
 use WinGear\Domain\Panier;
+use WinGear\Form\Type\PanierType;
 
 // Home page
 
@@ -258,16 +259,22 @@ $app->match('/panier/', function (Request $request) use ($app) {
 $app->match('/addPan/{id}/', function($id, Request $request) use ($app) {  
     $panier = new Panier();
     if ($app['security']->isGranted('IS_AUTHENTICATED_FULLY')) {
+        $user = $app['security']->getToken()->getUser(); 
+        $panierForm = $app['form.factory']->create(new PanierType(), $panier);
+        $panierForm->handleRequest($request);
+        if ($panierForm->isSubmitted() && $panierForm->isValid()){
+            $panier->setId_user($user->getID());
+            $panier->setId_product($id);
+            $app['dao.panier']->save($panier);
+            $app['session']->getFlashBag()->add('success', "L'article a été ajouté");
         
-        $user = $app['security']->getToken()->getUser();
-        $panier->setId_user($user);
-        $panier->setId_product($id);
-        $panier->setQuantite("1");
-        $app['dao.panier']->save($panier);
-    $app['session']->getFlashBag()->add('success', "L'article a été ajouté au panier");
+        }
+    return $app['twig']->render('panier_form.html.twig',array(
+        'title' => 'Ajout au Panier',
+        'panierForm' => $panierForm->createView()));  
     
-    }
-    return $app['twig']->render('panier.html.twig',array('paniers' => $paniers));    
-});
-
+    }});
+        
+    
+    
 
