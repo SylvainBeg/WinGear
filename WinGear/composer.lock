@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d4eadb249852323bbdbac7b38cbd9fb0",
+    "hash": "df69e7e9cccc05e20d2f317f92e8e5a0",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1605,6 +1605,66 @@
             "description": "Symfony Validator Component",
             "homepage": "https://symfony.com",
             "time": "2015-05-26 21:42:28"
+        },
+        {
+            "name": "symfony/var-dumper",
+            "version": "v2.6.8",
+            "target-dir": "Symfony/Component/VarDumper",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/var-dumper.git",
+                "reference": "89eec96645fb44af4a454a26c74c72ba6311f5bc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/89eec96645fb44af4a454a26c74c72ba6311f5bc",
+                "reference": "89eec96645fb44af4a454a26c74c72ba6311f5bc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "~2.7"
+            },
+            "suggest": {
+                "ext-symfony_debug": ""
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.6-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "Resources/functions/dump.php"
+                ],
+                "psr-0": {
+                    "Symfony\\Component\\VarDumper\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony mechanism for exploring and dumping PHP variables",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "debug",
+                "dump"
+            ],
+            "time": "2015-05-01 14:14:24"
         },
         {
             "name": "twig/extensions",

@@ -47,20 +47,18 @@ use WinGear\Domain\Panier;
     }
     
     public function save(Panier $panier){
+        
         $panierData = array(
             'pan_usr' => $panier->getId_user(),
             'pan_art' => $panier->getId_product(),
             'pan_quant' => $panier->getQuantite()
                 );
-        if($panier->getId_product() && $panier->getId_user()){
-            $this->getDb()->update('t_panier', $panierData, array('pan_art' => $panier->getId_product() , 'pan_usr' => $panier->getId_user()));
-          
-        } else{
+         
             $this->getDb()->insert('t_panier', $panierData);     
            
         }
            
-    }
+    
 
     public function delete($id_art,$id_usr) {
         // Delete the article
