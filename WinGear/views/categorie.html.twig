@@ -3,48 +3,46 @@
 {% block title %}{{ categorie.name }}{% endblock %}
 
 {% block content %}
-    </br>
+    
     <h2 class="text-center">{{ block('title') }}</h2>
-    <div class="well">
-        <form class="form-horizontal" role="form">
-            {#<div class="form-group">
-                <label class="col-sm-3 control-label">Nom produit</label>
-                <div class="col-sm-9">
-                    <p class="form-control-static">{{ categorie.art_title }}</p>
+ <article >
+     
+    <div id="content"> 
+        {% if categorie %}
+        <form class="form-horizontal" role="form">          
+        <div class="well">
+        
+        <div class="row">
+            {% for article in articles %} 
+            <div class="col-md-3 col-sm-6 col-xs-8 dl-horizontal">
+                
+                
+                
+                    <div class="thumbnail"> 
+                        
+                        <img src="../img/{{ article.image }}" alt="..."> 
+                        <div class="caption">
+                        <p>{{ article.title }} <p>
+                        <p>{{ article.price }} € </p>             
+                        <p><a href="/article/{{ article.id }}" class="btn btn-primary" role="button">Voir</a></p>  
+                       </div> 
+           
                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">Image</label>
-                <div class="col-sm-9">
-                    <p class="form-control-static">{{ categorie.art_image }}</p>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label">Prix</label>
-                <div class="col-sm-9">
-                    <p class="form-control-static">{{ categorie.art_price }}</p>
-                </div>aqa
-            </div>#}
+                    </div>
+            {% endfor %}
+        
+        </div>
+        
 
-
-
-
-            {% if categorie %}
-                        {% for article in articles %}
-                            <div class="row">
-                                <div class="col-sm-6 col-md-4">
-                                    <div class="thumbnail">
-                                        <img src="../img/{{ article.image }}" alt="...">
-                                        <div class="caption">
-                                            <h3>{{ article.title }}</h3>
-                                            <p>{{ article.price }} €</p>
-                                            <p><a href="/article/{{ article.id }}" class="btn btn-primary" role="button">Voir</a></p>
-                                        </div>
-                                    </div>
+    </div>
+    </form>
+    </div>
                                         
-                                </div>          
-                            </div>
-                        {% endfor %}
+                                      
+                                       
+                                        
+                       
+</article>
             {% else %}
                 <div class="alert alert-warning">Aucune catégorie trouvée.</div>
             {% endif %}   

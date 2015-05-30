@@ -1,15 +1,23 @@
 INSERT INTO `t_article` (`art_id`, `art_title`, `art_content`, `art_image`, `art_price`, `categorie`) VALUES
-(1, 'First article', 'Hi there! This is the very first article.', 'article1.png', 28.5, 0),
-(2, 'Lorem ipsum', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut hendrerit mauris ac porttitor accumsan. Nunc vitae pulvinar odio, auctor interdum dolor. Aenean sodales dui quis metus iaculis, hendrerit vulputate lorem vestibulum. Suspendisse pulvinar, purus at euismod semper, nulla orci pulvinar massa, ac placerat nisi urna eu tellus. Fusce dapibus rutrum diam et dictum. Sed tellus ipsum, ullamcorper at consectetur vitae, gravida vel sem. Vestibulum pellentesque tortor et elit posuere vulputate. Sed et volutpat nunc. Praesent nec accumsan nisi, in hendrerit nibh. In ipsum mi, fermentum et eleifend eget, eleifend vitae libero. Phasellus in magna tempor diam consequat posuere eu eget urna. Fusce varius nulla dolor, vel semper dui accumsan vitae. Sed eget risus neque.', 'article2.jpg', 18.1, 0),
-(3, 'Lorem ipsum in french', 'J’en dis autant de ceux qui, par mollesse d’esprit, c’est-à-dire par la crainte de la peine et de la douleur, manquent aux devoirs de la vie. Et il est très facile de rendre raison de ce que j’avance. Car, lorsque nous sommes tout à fait libres, et que rien ne nous empêche de faire ce qui peut nous donner le plus de plaisir, nous pouvons nous livrer entièrement à la volupté et chasser toute sorte de douleur ; mais, dans les temps destinés aux devoirs de la société ou à la nécessité des affaires, souvent il faut faire divorce avec la volupté, et ne se point refuser à la peine. La règle que suit en cela un homme sage, c’est de renoncer à de légères voluptés pour en avoir de plus grandes, et de savoir supporter des douleurs légères pour en éviter de plus fâcheuses.', 'article3.jpg', 10.35, 0),
+(1, 'Sac tennis', 'Sac Pouvant transporter juqu''à 6 raquettes de tennis ! Idéal pour sportif confirmer','bag1.jpg',65,3),
+(2, 'Résine blanche PROMO',' 5 pots de résine Blanche avec spray anti colle offert profitez en dès maintenant !','colle.jpg',35,1),
+(3, 'Chaussure nike',' Chaussure nike édition 2013/2014, utilisé par Neymar et bien d''autre','foot.jpg',90,2),
 (4, 'Ballon Tricolor', 'Le nouveau ballon tricolore : idéal pour soutenir l''équipe national tout ne gagnant vos matchs ! :)', 'article1.png', 30, 1),
 (5, 'ballon handball 2', 'Ce ballon est idéal pour les entraînements.', 'article3.jpg', 20.5, 1),
-(6, 'Ballon de foot basique', 'Le ballon idéal pour amuser vos enfants.', '4545564.jpg', 7.5, 2);
+(6, 'Ballon de foot basique', 'Le ballon idéal pour amuser vos enfants.', '4545564.jpg', 7.5, 2),
+(7, 'Chaussure Nike','NOUVELLE COLLECTION : fan de ZLATAN ? alors commandez !' ,'foot2.jpg', 110,2),
+(8, 'Mizuko 2016','Nouvelle collection Mizuko Handball extra confort','handchauss.jpg',75,1),
+(9, 'Balle Kronum', 'Fan de ce nouveau sport ? Achater dès maintenant votre ballon Kronum','kronum.jpg',15,4),
+(10, 'Raquette Wilson', 'Federer l''a adopté pourquoi pas vous? ','tennis1.jpg',50,3),
+(11, 'Volant à plume', 'Bientôt pro de Badminton ? Adopter pour les volants à plus, beaucoup plus rapide : lot de 10 volants','volant.jpg',25,6);
+
 
 INSERT INTO `t_categorie` (`cate_id`, `cate_name`) VALUES
 (1, 'Handball'),
 (2, 'Football'),
-(3, 'Tennis');
+(3, 'Tennis'),
+(4, 'Kronum'),
+(5, 'Badminton');
 /* raw password is 'john' */
 INSERT INTO `t_user` (`usr_id`, `usr_name`, `usr_password`, `usr_salt`, `usr_role`, `usr_nom`, `usr_prenom`, `usr_email`) VALUES
 (2, 'JaneDoe', 'EfakNLxyhHy2hVJlxDmVNl1pmgjUZl99gtQ+V3mxSeD8IjeZJ8abnFIpw9QNahwAlEaXBiQUBLXKWRzOmSr8HQ==', 'dhMTBkzwDKxnD;4KNs,4ENy', 'ROLE_USER', '', '', ''),
@@ -20,5 +28,3 @@ INSERT INTO `t_comment` (`com_id`, `com_content`, `art_id`, `usr_id`) VALUES
 (1, 'J''adoooore ! :)', 6, 3),
 (2, 'mm', 5, 3);
 
-INSERT INTO t_panier ( pan_usr, pan_art, pan_quant) Values
-(5,2,1);

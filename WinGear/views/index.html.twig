@@ -3,26 +3,44 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-{% for article in articles %}
+
 <article >
-    
-    <div display:inline>                    
-            <div class="row" >
-                                <div class="col-sm-6 col-md-4" >
-                                    <div class="thumbnail">
-                                        <img src="../img/{{ article.image }}" alt="...">
-                                        <div class="caption">
-                                            <h3>{{ article.title }}</h3>
-                                            <p>{{ article.price }} €</p>
-                                            <p><a href="/article/{{ article.id }}" class="btn btn-primary" role="button">Voir</a></p>
-                                        </div>
-                                    </div>
-                                        
-                                </div>          
-                            </div> 
+     
+    <div id="content"> 
+        <h2 class="text-center">Equipements</h2>
+        <form class="form-horizontal" role="form">          
+        <div class="well">
+        
+        <div class="row">
+            {% for article in articles %} 
+            <div class="col-md-3 col-sm-6 col-xs-8 dl-horizontal">
+                
+                
+                
+                    <div class="thumbnail"> 
+                        
+                        <img src="../img/{{ article.image }}" alt="..."> 
+                        <div class="caption">
+                        <p>{{ article.title }} <p>
+                        <p>{{ article.price }} € </p>             
+                        <p><a href="/article/{{ article.id }}" class="btn btn-primary" role="button">Voir</a></p>  
+                       </div> 
+           
+                </div>
+                    </div>
+            {% endfor %}
+        
+        </div>
+        
+
     </div>
+    </form>
+    </div>
+                                        
+                                      
+                                       
                                         
                        
 </article>
-{% endfor %}
+
 {% endblock %}
